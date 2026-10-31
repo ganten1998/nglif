@@ -1,0 +1,71 @@
+<!-- For a list of commands, see file src/command/mod.rs enum Command -->
+<keybindings>
+    <!-- zoom -->
+    <binding command="ResetScale" key="1"/>
+    <binding command="ZoomIn" key="="/>
+    <binding command="ZoomOut" key="-"/>
+
+    <!-- move camera -->
+    <binding command="NudgeUp" key="Up"/>
+    <binding command="NudgeBigUp" key="Up" mod="CtrlMod"/>
+    <binding command="NudgeTinyUp" key="Up" mod="AltMod"/>
+    <binding command="NudgeDown" key="Down"/>
+    <binding command="NudgeBigDown" key="Down" mod="CtrlMod"/>
+    <binding command="NudgeTinyDown" key="Down" mod="AltMod"/>
+    <binding command="NudgeLeft" key="Left"/>
+    <binding command="NudgeBigLeft" key="Left" mod="CtrlMod"/>
+    <binding command="NudgeTinyLeft" key="Left" mod="AltMod"/>
+    <binding command="NudgeRight" key="Right"/>
+    <binding command="NudgeBigRight" key="Right" mod="CtrlMod"/>
+    <binding command="NudgeTinyRight" key="Right" mod="AltMod"/>
+
+    <!-- tools -->
+    <binding command="ToolPan" key="A"/>
+    <binding command="ToolPen" key="P"/>
+    <binding command="ToolSelect" key="V"/>
+    <binding command="ToolZoom" key="Z"/>
+    <binding command="ToolDash" key="D" mod="AltMod"/>
+    <binding command="ToolPAP" key="P" mod="AltMod"/>
+    <binding command="ToolVWS" key="W"/>
+    <binding command="ToolMeasure" key="M"/>
+    <binding command="ToolAnchors" key="N"/>
+    <binding command="ToolShapes" key="S"/>
+    <binding command="ToolGuidelines" key="G"/>
+    <binding command="ToolGrid" key="G" mod="AltMod"/>
+    <binding command="ToolImages" key="I" mod="AltMod"/>
+
+    <!-- view modes -->
+    <binding command="TogglePointLabels" key="3" mod="ShiftMod"/>
+    <binding command="TogglePreviewMode" key="`"/>
+
+    <!-- console -->
+    <binding command="ToggleConsole" key=";"/>
+
+    <!-- selection -->
+    <binding command="DeleteSelection" key="Backspace"/>
+    <binding command="DeleteSelection" key="Delete"/>
+    <binding command="SelectAll" key="A" mod="CtrlMod"/>
+    <binding command="CopySelection" key="C" mod="CtrlMod"/>
+    <binding command="PasteSelection" key="V" mod="CtrlMod"/>
+    <binding command="PasteSelectionInPlace" key="V" mod="CtrlAltMod"/>
+    <binding command="CutSelection" key="X" mod="CtrlMod"/>
+
+    <!-- history -->
+    <binding command="HistoryUndo" key="Z" mod="CtrlMod"/>
+    <binding command="HistoryRedo" key="Y" mod="CtrlMod"/>
+
+    <!-- I/O -->
+    <binding command="IOOpen" key="O" mod="CtrlMod"/>
+    <binding command="IOSave" key="S" mod="CtrlMod"/>
+    <binding command="IOSaveAs" key="S" mod="CtrlShiftMod"/>
+    <binding command="IOFlatten" key="U" mod="CtrlMod"/>
+    <binding command="IOFlattenAs" key="U" mod="CtrlShiftMod"/>
+    <binding command="IOExport" key="E" mod="CtrlMod"/>
+
+    <!-- misc -->
+    <binding command="Quit" key="Q" mod="CtrlMod"/>
+    <binding command="ReverseContour" key="Tab"/>
+
+    <!-- debug -->
+    <binding command="SkiaDump" key="D" mod="CtrlShiftMod"/>
+</keybindings>

@@ -1,0 +1,164 @@
+[package]
+name = "MFEKglif"
+version = "2.0.1-beta1"
+authors = ["Fredrick Brennan <copypaste@kittens.ph>", "Matthew Blanchard <matthewrblanchard@gmail.com>", "MFEK Authors"]
+edition = "2021"
+license = "Apache-2.0"
+keywords = ["ufo", "font-format", "glif", "fonts"]
+build = "build.rs"
+
+# Cargo.toml reference: https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+# For display
+# We might need to vendorize these some day. See aclysma/skulpin#66:
+# https://github.com/aclysma/skulpin/issues/66#issuecomment-689244118
+# Commented versions I occasionally use in development to stick extra debug!'s in Skulpin.
+#skulpin = { version = "0.10.0", default-features = false, features = ["skia_complete", "skulpin_winit"] }
+#skulpin = { path = "../skulpin", default-features = false, features = ["skia_complete", "skulpin_winit"] }
+#skulpin-plugin-imgui = { path = "../skulpin/skulpin-plugin-imgui" }
+#skulpin = { git = "https://github.com/MFEK/skulpin" }
+#skulpin-renderer = {git = "https://github.com/MFEK/skulpin/"}
+gl = "0.14.0"
+skia-safe = { version = "0.70.0", features = ["gl"] }
+skia-bindings = { version = "0.70.0", features = ["gl"] }
+
+# For windowing, contexts, and events
+sdl2 = { version = ">=0.34", features = ["raw-window-handle"] }
+
+# For choosing font for toolbox
+font-kit = "0.10"
+
+# Used in the panic hook to display cross platform message boxes.
+msgbox = "0.6.1"
+
+# For global state
+lazy_static = "1.4"
+
+# For immediate mode GUI
+#imgui = "0.7"
+#imgui-sdl2 = "0.14"
+#imgui-skia-renderer = {git = "https://github.com/MFEK/imgui-skia-renderer.rlib", branch = "main"}
+#imgui-skia-renderer = { path = "../imgui-skia-renderer.rlib" } # for development
+egui = { git = "https://github.com/MFEK/egui.rlib" }
+egui-sdl2-event = { git = "https://github.com/MFEK/egui-sdl2-event.rlib" }
+egui_skia = { git = "https://github.com/MFEK/egui_skia.rlib" }
+# For argument parsing
+clap = "3.0"
+
+# For UI toggles
+enum-iterator = "0.7.0"
+enum-unitary = "0.4"
+itertools = "0.10"
+
+# Display backtraces
+colored = "2.0"
+atty = "0.2"
+
+arboard = { version = "2.0" }
+shrinkwraprs = "0.3.0"
+
+# Logging
+log = "0.4"
+env_logger = "0.9"
+
+# Gives us derive(Display)
+derive_more = "0.99"
+
+# Gives us derivative(Debug)
+derivative = "2.2"
+
+# File dialog
+nfd = { git = "https://github.com/MFEK/nfd.rs" }
+
+# File locking
+fs2 = "0.4"
+
+# Command parsing for console
+regex = "1"
+
+serde_json = { version = "1.0" }
+serde = "1.0"
+
+float-cmp = "0.9"
+num = "0.4"
+num-traits = "0.2"
+num-derive = "0.3"
+ctrlc = "3.2"
+
+## Our crates
+# parses .glif files and gives us a place to put arbitrary data
+glifparser = { git = "https://github.com/MFEK/glifparser.rlib", branch = "master", features=["skia", "mfek"] }
+#glifparser = { path = "../glifparser.rlib", features=["skia", "mfek"] } # for development
+
+MFEKmath = { git = "https://github.com/MFEK/math.rlib", branch = "main" }
+#MFEKmath = { path = "../math.rlib", features=["skia"]} # for development
+
+pub-mod = { git = "https://github.com/MFEK/pub_mod.rlib" }
+
+mfek-ipc = { git = "https://github.com/MFEK/ipc.rlib" }
+#mfek-ipc = { path = "../ipc.rlib" } # for development
+
+glifrenderer = { git = "https://github.com/MFEK/glifrenderer.rlib" }
+#glifrenderer = { path = "../glifrenderer.rlib" } # for development
+
+# forked from linebender/spline
+spline = { git = "https://github.com/MFEK/spline.rlib" }
+#spline = { path = "../spline.rlib" } # for development
+### END OF OUR CRATES ###
+
+#xml parsing
+xmltree = "0.10"
+
+# trait object-safe cloning
+dyn-clone = "1.0"
+
+#config file directory resolution
+directories = "4"
+
+#converting enums to strings
+strum = { version = "0.24", features = ["derive"] }
+strum_macros = "0.24"
+
+#for logo, could be used in future for background images
+image = { version = "0.23", features = ["png"], default-features = false }
+
+# for certain Bézier curve manipulation functions
+flo_curves = "0.6"
+
+# for exporting UFO .glif files to layers
+plist = "1.3"
+
+# we use this for affine matrices in some of our data types
+kurbo = { git = "https://github.com/MFEK/kurbo.rlib", branch = "master" }
+
+# show backtrace
+backtrace = "0.3"
+
+# See src/util/mod.rs::set_codepage_utf8
+[target.'cfg(windows)'.dependencies]
+winapi = "0.3"
+
+[build-dependencies]
+cargo-emit = "0.2"
+cfg-if = "1.0"
+chrono = "=0.4.31"
+colored = "2.0"
+git-version = "0.3.0"
+log = "0.4"
+which = "4.2"
+
+[features]
+default = []
+sdl2-static = ["sdl2/bundled", "sdl2/static-link"]
+sdl2-dynamic = []
+reproducible-build = ["mfek-ipc/reproducible-build"]
+
+[profile.release]
+opt-level = 3
+#lto = true
+codegen-units = 1
+panic = "abort"
+
+[patch.crates-io]
+pathfinder_simd = { git = "https://github.com/servo/pathfinder", rev = "6c3c0466f451c5bd2007087728cd168798cd64e8"}

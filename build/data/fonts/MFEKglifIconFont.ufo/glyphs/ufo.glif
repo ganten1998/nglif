@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glyph name="ufo" format="2">
+  <advance width="700"/>
+  <unicode hex="F037"/>
+  <outline>
+    <contour>
+      <point x="215.55557" y="326.6667" type="curve"/>
+      <point x="225.48709" y="411.08447"/>
+      <point x="276.88892" y="475.5556"/>
+      <point x="348.88892" y="475.5556" type="curve"/>
+      <point x="420.88892" y="475.5556"/>
+      <point x="476.99243" y="412.58087"/>
+      <point x="484.22223" y="327.88892" type="curve"/>
+      <point x="559.7778" y="313.44446"/>
+      <point x="618.77783" y="277.77777"/>
+      <point x="617" y="234.44444" type="curve"/>
+      <point x="615.40314" y="195.52159"/>
+      <point x="540" y="127.77774"/>
+      <point x="350" y="127.77777" type="curve"/>
+      <point x="160" y="127.77779"/>
+      <point x="82.44445" y="196.44444"/>
+      <point x="82.44445" y="234.22221" type="curve"/>
+      <point x="82.44445" y="272"/>
+      <point x="134.44446" y="316.6667"/>
+    </contour>
+    <contour>
+      <point x="350" y="422.22223" type="curve"/>
+      <point x="311.0305" y="421.92075"/>
+      <point x="263.33334" y="380"/>
+      <point x="272.22223" y="294.44446" type="curve"/>
+      <point x="324.5303" y="288.0293"/>
+      <point x="376.25" y="288.125"/>
+      <point x="428.75" y="293.125" type="curve"/>
+      <point x="437.77777" y="381.11115"/>
+      <point x="389.50208" y="422.52786"/>
+    </contour>
+  </outline>
+</glyph>

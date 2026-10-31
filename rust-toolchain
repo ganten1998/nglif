@@ -1,1 +1,9 @@
-nightly
+[toolchain]
+# nglif needs nightly: the MFEK parser crates use unstable const generics
+# (`generic_const_exprs`, `adt_const_params`, `unsized_const_params`).
+#
+# Pinned so Fedora, Debian and Arch all build with the same compiler; a moving
+# `nightly` breaks MFEK's crates whenever a feature changes. Bump this together
+# with a release, never in a packaging run.
+channel = "nightly-2026-10-29"
+profile = "minimal"

@@ -34,7 +34,7 @@ impl Editor {
                         if filename.file_name().unwrap() == p.file_name().unwrap() {
                             if !self.just_saved() {
                                 i.push_prompt(InputPrompt::YesNo {
-                                    question: "Another program/MFEKglif instance rewrote the current \nglyph. Reload? Any changes made will be lost.\n ".to_string(),
+                                    question: "Another program/nglif instance rewrote the current \nglyph. Reload? Any changes made will be lost.\n ".to_string(),
                                     afterword: "".to_string(),
                                     func: Rc::new(move |v, i, reload| {
                                         if !reload { return }

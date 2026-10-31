@@ -4,8 +4,6 @@
 extern crate cfg_if;
 #[macro_use]
 extern crate cargo_emit;
-#[macro_use]
-extern crate git_version;
 
 use which::which;
 
@@ -17,11 +15,11 @@ fn main() {
             compile_error!("Features `sdl2-static` and `sdl2-dynamic` are mutually exclusive!");
         }
     }
-    let version = git_version!(
-        args = ["--tags", "--always", "--dirty=-desync"],
-        fallback = "v1"
-    );
+    // The version in Cargo.toml is the single source of truth: `git describe`
+    // produced `-desync`/commit-hash strings that no package manager accepts.
+    let version = std::env::var("CARGO_PKG_VERSION").unwrap_or_else(|_| String::from("0.0.0"));
     rustc_env!("MFEK_VERSION", "{}", version);
+    rustc_env!("MFEK_PKG_NAME", "{}", std::env::var("CARGO_PKG_NAME").unwrap_or_else(|_| String::from("nglif")));
     rustc_env!("MFEK_COMPILED_AT", "{}", chrono::Local::now().timestamp());
     #[cfg(all(target_os = "macos", feature = "sdl2-dynamic"))]
     linker_macos_sdl2();
@@ -37,7 +35,7 @@ fn main() {
         } else if #[cfg(all(not(feature = "sdl2-static"), any(target_family = "windows", target_os = "macos"), not(feature = "sdl2-dynamic")))] {
             println!("cargo:rustc-cfg=feature=\"sdl2-static\"");
         } else if #[cfg(all(target_family = "windows", feature = "sdl2-dynamic"))] {
-            warning!("It is neither recommended nor supported to compile MFEKglif on Windows w/dynamic SDL2.");
+            warning!("It is neither recommended nor supported to compile nglif on Windows w/dynamic SDL2.");
         }
     }
     cfg_if! {
@@ -47,7 +45,7 @@ fn main() {
             println!("cargo::rustc-check-cfg=cfg(is_free_software_os)");
         } else {
             println!("cargo::rustc-check-cfg=cfg(is_free_software_os)");
-            warning!("MFEKglif works best on free software operating systems such as GNU/Linux and FreeBSD. Close Windows, open doors: <https://www.fsf.org/windows>");
+            warning!("nglif works best on free software operating systems such as GNU/Linux and FreeBSD. Close Windows, open doors: <https://www.fsf.org/windows>");
         }
     }
 }

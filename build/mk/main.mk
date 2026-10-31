@@ -2,7 +2,7 @@ COMMA:=,
 SOURCES:=$(shell find src -iname '*.rs')
 SHELL:=/bin/bash
 
-MFEK_MODULE := MFEKglif
+MFEK_MODULE := nglif
 export MFEK_ARGS := $(if $(MFEK_ARGS),$(MFEK_ARGS),'examples/Layered.ufo/glyphs/S_.rhigh.layered.glifjson')
 
 UNAME_FIRST=$(word 1, $(shell uname -a))
@@ -14,7 +14,7 @@ export CARGO_PROFILE_ARG := --$(CARGO_PROFILE)
 endif
 
 # Cargo flags
-export RUST_LOG := $(if $(RUST_LOG),$(RUST_LOG),MFEKglif=debug$(COMMA)mfek_ipc=trace)
+export RUST_LOG := $(if $(RUST_LOG),$(RUST_LOG),nglif=debug$(COMMA)mfek_ipc=trace)
 export RUST_BACKTRACE := $(if $(RUST_BACKTRACE),$(RUST_BACKTRACE),)
 
 all: build

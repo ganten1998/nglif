@@ -17,11 +17,11 @@ pub enum HeadlessMode {
 }
 
 pub fn parse_args() -> Args {
-    let matches = clap::App::new("MFEKglif")
+    let matches = clap::App::new("nglif")
         .setting(clap::AppSettings::DeriveDisplayOrder)
         .version(env!("MFEK_VERSION"))
-        .author("Fredrick R. Brennan, Matthew Blanchard, MFEK Authors")
-        .about("Glyph editor, Modular Font Editor K Project")
+        .author("Fredrick R. Brennan, Matthew Blanchard, MFEK Authors, Nebuff")
+        .about("Stand-alone Unified Font Object (UFO) glyph (.glif) viewer and editor")
         .arg(
             clap::Arg::new("GLIF")
                 .help("Input UFO format .glif file")

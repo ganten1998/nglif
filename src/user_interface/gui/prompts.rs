@@ -13,7 +13,7 @@ pub fn build_and_check_prompts(v: &mut Editor, i: &mut Interface, ctx: &egui::Co
             afterword: _,
             func,
         } => {
-            egui::Window::new("MFEKglif")
+            egui::Window::new("nglif")
                 .resizable(false)
                 .collapsible(false)
                 .anchor(Align2::CENTER_CENTER, [0., 0.])

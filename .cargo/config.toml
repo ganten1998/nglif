@@ -1,0 +1,9 @@
+# font-kit 0.10 (UI font lookup) pulls servo-fontconfig-sys and freetype-sys,
+# whose vendored expat/freetype declare `cmake_minimum_required(VERSION 2.8.12)`.
+# CMake 4 — shipped by Fedora 42+, Debian 13 and current Arch — refuses to
+# configure anything below 3.5, so the build dies before Rust is even reached.
+# This lets those old projects configure under current policy.
+#
+# Remove only after font-kit (or the vendored C deps) has been updated.
+[env]
+CMAKE_POLICY_VERSION_MINIMUM = "3.5"

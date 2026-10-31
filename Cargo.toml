@@ -1,11 +1,17 @@
 [package]
-name = "MFEKglif"
-version = "2.0.1-beta1"
-authors = ["Fredrick Brennan <copypaste@kittens.ph>", "Matthew Blanchard <matthewrblanchard@gmail.com>", "MFEK Authors"]
+name = "nglif"
+version = "2.1.0"
+description = "Stand-alone UFO .glif glyph viewer and editor"
+repository = "https://github.com/nebuff/nglif"
+authors = ["Fredrick Brennan <copypaste@kittens.ph>", "Matthew Blanchard <matthewrblanchard@gmail.com>", "MFEK Authors", "Nebuff"]
 edition = "2021"
 license = "Apache-2.0"
 keywords = ["ufo", "font-format", "glif", "fonts"]
 build = "build.rs"
+
+[[bin]]
+name = "nglif"
+path = "src/main.rs"
 
 # Cargo.toml reference: https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -144,7 +150,6 @@ cargo-emit = "0.2"
 cfg-if = "1.0"
 chrono = "=0.4.31"
 colored = "2.0"
-git-version = "0.3.0"
 log = "0.4"
 which = "4.2"
 

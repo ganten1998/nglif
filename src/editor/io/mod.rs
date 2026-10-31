@@ -44,7 +44,7 @@ impl Editor {
     pub fn load_glif<F: AsRef<Path> + Clone>(&mut self, interface: &mut Interface, filename: F) {
         interface
             .set_window_title(&format!(
-                "MFEKglif — {}",
+                "nglif — {}",
                 filename.as_ref().to_str().unwrap()
             ))
             .expect("Failed to set SDL2 window title");

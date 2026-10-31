@@ -37,7 +37,7 @@ impl Interface {
 
         let mut window = video_subsystem
             .window(
-                &format!("MFEKglif — {}", filename),
+                &format!("nglif — {}", filename),
                 viewport.winsize.0 as u32,
                 viewport.winsize.1 as u32,
             )

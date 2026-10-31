@@ -84,7 +84,7 @@ pub fn set_panic_hook() {
             env::var("MFEK_QUIET_CRASH").is_err() && env::var("MFEK_QUIET_CRASH_MSGBOX").is_err();
         if !headless && !quiet_msgbox {
             let err = msgbox::create(
-                "Uh oh! \u{2014} MFEKglif crashed",
+                "Uh oh! \u{2014} nglif crashed",
                 info.to_string().as_str(),
                 IconType::Error,
             );
@@ -122,7 +122,7 @@ pub fn init_env_logger() {
         if *DEBUG_DUMP_GLYPH || *DEBUG_EVENTS {
             env::set_var(
                 "RUST_LOG",
-                "INFO,MFEKglif=trace,rafx_framework=off,rafx_api=off,skulpin=off",
+                "INFO,nglif=trace,rafx_framework=off,rafx_api=off,skulpin=off",
             )
         } else {
             env::set_var(

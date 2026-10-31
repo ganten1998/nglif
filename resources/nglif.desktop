@@ -1,0 +1,17 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Categories=Graphics;2DGraphics;VectorGraphics;
+Comment[en_US]=Stand-alone Unified Font Object (UFO) glyph (.glif) viewer and editor
+Comment=Stand-alone Unified Font Object (UFO) glyph (.glif) viewer and editor
+TryExec=nglif
+Exec=nglif %U
+GenericName[en_US]=Glyph Editor
+GenericName=Glyph Editor
+Icon=nglif
+MimeType=text/vnd.ufo.glif;text/vnd.mfek.glifjson;
+Name[en_US]=nglif
+Name=nglif
+StartupNotify=true
+StartupWMClass=nglif
+Terminal=false

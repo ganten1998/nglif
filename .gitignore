@@ -1,0 +1,6 @@
+# Build output
+/target/
+
+# Packaging output produced by nglifBuilds
+/repo/
+/out/

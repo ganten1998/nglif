@@ -1,15 +1,23 @@
-# MFEKglif
+# nglif
 
-Glyph editor for the Modular Font Editor K project. [![Build Status](https://img.shields.io/github/actions/workflow/status/MFEK/glif/rust.yml?branch=master)](https://github.com/MFEK/glif/actions?workflow=Rust)
+Stand-alone UFO `.glif` glyph viewer and editor — the Nebuff continuation of
+[MFEKglif](https://github.com/MFEK/glif), maintained to build and run on current
+Linux distributions.
 
-**Current beta release: [v2.0.0ꞵ1 “Repetitive Spline Injury”](https://github.com/MFEK/glif/releases/tag/v2.0.0b1)**
+## Install
 
-#### Binaries (links in § [Artifacts](https://github.com/MFEK/glif/actions/runs/1711307059))
-* [Linux](https://github.com/MFEK/glif/suites/4969738325/artifacts/144842097)
-* [Windows](https://github.com/MFEK/glif/suites/4969738325/artifacts/144842099)
-* [macOS](https://github.com/MFEK/glif/suites/4969738325/artifacts/144842098) (not notarized — please also read notes in § Running from artifacts → Mac users)
+```sh
+curl -sSL https://install.nebuff.xyz/nglif | bash   # add the Nebuff Repo, once
+sudo dnf install nglif                              # Fedora / RHEL
+sudo apt install nglif                              # Debian / Ubuntu
+sudo pacman -S nglif                                # Arch
+```
 
-![](https://raw.githubusercontent.com/MFEK/glif/master/doc/screenshot_main.png)
+Every distribution's package is built inside that distribution, so it links its
+own GTK 3, SDL2 and glibc and updates with the system. Versions, sizes,
+checksums and the signing key: <https://repo.nebuff.xyz/nglif/>.
+
+![](doc/screenshot_main.png)
 
 <img src="https://raw.githubusercontent.com/MFEK/glif/master/doc/screenshot.png" width="300"><img src="https://raw.githubusercontent.com/MFEK/glif/master/doc/screenshot2.png" width="300">
 
@@ -21,7 +29,7 @@ Glyph editor for the Modular Font Editor K project. [![Build Status](https://img
     * [I/O](#io)
     * [Tools](#tools)
     * [Selection](#selection)
-3. [Running from artifacts](#running-from-artifacts)
+3. [Installing](#installing)
 4. [Building](#building)
     * [Mac users](#mac-users)
     * [Linux users](#linux-users)
@@ -79,9 +87,13 @@ Note: This is a basic list to get you started. A complete list can be found in `
 * <kbd>Ctrl</kbd><kbd>A</kbd> &mdash; Select all points in current layer
 * <kbd>Backspace</kbd> &mdash; Delete currently selected points
 
-## Running from artifacts
+## Installing
 
-MFEKglif is still beta-quality software, and a numbered release hasn't been made yet. Before 1.0 is out, though, you can test it out with the artifacts function in GitHub. Go to [«Actions»](https://github.com/MFEK/glif/actions), choose a commit, and download the artifact for your OS. Three are uploaded: MFEKglif-linux, MFEKglif-windows, and MFEKglif-macos (not notarized).
+The Nebuff Repo packages are the supported way to install nglif: add the
+repository once, then install the package by name (§ Install above). Every
+release also publishes a portable tarball for machines without a package
+manager; the current one is linked from <https://repo.nebuff.xyz/nglif/> and
+extracts to a plain `usr/` tree.
 
 ## Building
 
@@ -93,23 +105,33 @@ Apple charges a fee to "notarize" applications and without this "notarization" M
 
 ### Linux users
 
-MFEKglif depends on GTK3 (for the open/save dialogs) and SDL2 (for windowing). If using X11 and not Wayland, it depends on the X11 C shape extension (`libxcb-shape.so.0`) and the xfixes extension (`libxcb-xfixes.so.0`). Their header files are also needed: `/usr/include/xcb/shape.h` and `/usr/include/xcb/xfixes.h`.
+nglif depends on GTK 3 (for the open/save dialogs) and SDL2 (for windowing), and
+at build time on a C/C++ toolchain and CMake (Skia and fontconfig). The pinned
+nightly Rust from `rust-toolchain` is installed automatically by `rustup`.
 
-On Arch Linux, these three packages provide all the dependencies: `gtk3` `libxcb` `sdl2`
+| Distribution | Build dependencies |
+| --- | --- |
+| Fedora | `gtk3-devel SDL2-devel cmake gcc-c++ pkgconf-pkg-config` |
+| Debian / Ubuntu | `libgtk-3-dev libsdl2-dev cmake build-essential pkg-config` |
+| Arch | `gtk3 sdl2 cmake base-devel` |
 
-On Ubuntu, these four packages provide the dependencies: `libgtk-3-dev` `libxcb-shape0-dev` `libxcb-xfixes0-dev` `sdl2-dev`
+If using X11 and not Wayland, SDL2 also needs the X11 C shape extension
+(`libxcb-shape.so.0`) and the xfixes extension (`libxcb-xfixes.so.0`).
 
 #### Adding `.desktop` shortcut
 
-I provide a `.desktop` shortcut in `resources/` as `MFEKglif.desktop`. To install it, assuming MFEKglif is in your `$PATH`:
+A `.desktop` shortcut lives in `resources/` as `nglif.desktop` (the packages
+install it to `/usr/share/applications/`). To install it, assuming nglif is in
+your `$PATH`:
 
-1. Copy the icon to `$XDG_HOME`. On my system, the command was `mkdir -p ~/.local/share/icons/hicolor/512x512/apps/ && cp resources/MFEKglif.png ~/.local/share/icons/hicolor/512x512/apps/MFEKglif.png`.
+1. Copy the icon to `$XDG_HOME`: `mkdir -p ~/.local/share/icons/hicolor/512x512/apps/ && cp resources/nglif.png ~/.local/share/icons/hicolor/512x512/apps/nglif.png`.
 2. Run `desktop-file-install --dir=~/.local/share/applications ~/MFEKglif.desktop` to install locally (also depends on `$XDG_HOME`, or run it as root without `--dir` to install the `.desktop` icon globally.
 3. Run `update-desktop-database` on the directory used in step 2.
 
 ### For everyone
 
-* Download and install [`rustup`](https://rustup.rs/), selecting either the `nightly` or `stable` toolchain. MFEKglif builds on both as of 7 November 2021.
+* Download and install [`rustup`](https://rustup.rs/) — `rust-toolchain` pins the
+  exact nightly nglif needs, and rustup installs it on the first build.
 * Pull this repository, and finally…
 * Compile the project. An example command is in § Contributing; you may also find the provided `Makefile` helpful.
 

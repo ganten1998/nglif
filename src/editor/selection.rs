@@ -174,7 +174,7 @@ impl Editor {
             match serde_json::from_str(data) {
                 Ok(d) => Ok(d),
                 Err(e) => {
-                    gui::error!("Could not understand text/vnd.mfek.glifjson we think we produced. Mismatched MFEKglif versions running on same machine? {:?}", &e);
+                    gui::error!(                    "Could not understand text/vnd.mfek.glifjson we think we produced. Mismatched nglif versions running on same machine? {:?}", &e);
                     Err(())
                 }
             }

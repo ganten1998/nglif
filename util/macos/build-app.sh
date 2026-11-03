@@ -126,6 +126,7 @@ if [ $want_dmg = 1 ]; then
     stage=$(mktemp -d)
     cp -R "$APP" "$stage/"
     ln -s /Applications "$stage/Applications"
+    cp util/macos/dmg-readme.txt "$stage/Read Me First.txt"
     cp LICENSE "$stage/LICENSE.txt"
     rm -f "$dmg"
     hdiutil create -quiet -volname "nglif $version" -srcfolder "$stage" -fs HFS+ -format UDZO -ov "$dmg"

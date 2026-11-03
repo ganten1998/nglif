@@ -20,8 +20,8 @@ jobs:
     name: Build nglif.app
     runs-on: macos-15
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/cache@v4
+      - uses: actions/checkout@v7
+      - uses: actions/cache@v6
         with:
           path: |
             ~/.cargo/registry
@@ -32,7 +32,7 @@ jobs:
         run: util/macos/build-app.sh --dmg
       - name: Unit tests
         run: cargo test --release --locked --target aarch64-apple-darwin
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: nglif-macos
           path: target/macos/*.dmg
@@ -51,14 +51,14 @@ jobs:
             runner: macos-15-intel
     runs-on: ${{ matrix.runner }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4
+      - uses: actions/checkout@v7
+      - uses: actions/download-artifact@v8
         with:
           name: nglif-macos
           path: dist
       - name: Install from the .dmg, open a glyph, screenshot it
         run: util/macos/ci-smoke.sh dist/*.dmg
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: smoke-${{ matrix.runner }}
@@ -75,7 +75,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: nglif-macos
           path: dist

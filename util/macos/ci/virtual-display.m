@@ -70,13 +70,17 @@ int main(int argc, char **argv) {
         // becomes the main display, where new windows (and the menu bar) appear.
         for (int i = 0; i < 100 && !CGDisplayIsOnline(vid); i++) usleep(50000);
         CGDirectDisplayID old = CGMainDisplayID();
-        CGDisplayConfigRef config;
-        if (CGBeginDisplayConfiguration(&config) == kCGErrorSuccess) {
+        // Some virtual machines ignore a configuration that only lasts as long as this process,
+        // so fall back to one for the login session (CI machines are thrown away afterwards).
+        CGConfigureOption options[] = {kCGConfigureForAppOnly, kCGConfigureForSession};
+        for (int attempt = 0; attempt < 2 && CGMainDisplayID() != vid; attempt++) {
+            CGDisplayConfigRef config;
+            if (CGBeginDisplayConfiguration(&config) != kCGErrorSuccess) break;
             CGConfigureDisplayOrigin(config, vid, 0, 0);
             if (old != vid) CGConfigureDisplayOrigin(config, old, (int32_t)w, 0);
-            CGCompleteDisplayConfiguration(config, kCGConfigureForAppOnly);
+            CGCompleteDisplayConfiguration(config, options[attempt]);
+            for (int i = 0; i < 30 && CGMainDisplayID() != vid; i++) usleep(100000);
         }
-        usleep(500000);
         size_t pw = CGDisplayPixelsWide(vid), ph = CGDisplayPixelsHigh(vid);
         CGDisplayModeRef mode = CGDisplayCopyDisplayMode(vid);
         printf("virtual-display: id %u, %zux%zu points, %zux%zu pixels, main=%s\n", vid, pw, ph,

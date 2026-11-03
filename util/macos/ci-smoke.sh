@@ -99,7 +99,7 @@ cat "$out/virtual-display.log"
 if grep -q 'main=yes' "$out/virtual-display.log"; then
     gui retina 2
 else
-    echo "  skip  could not create a virtual Retina display here"
+    echo "  skip  could not make a virtual Retina display the main one here"
 fi
 kill "$vd" 2>/dev/null || true
 

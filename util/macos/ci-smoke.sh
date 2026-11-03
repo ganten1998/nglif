@@ -63,6 +63,13 @@ gui() {
         check "$name: window opened" false
         return
     fi
+    if [ "${scale%.*}" != "$want_scale" ]; then
+        # Where the window opens is up to macOS. Intel CI machines accept the virtual display as
+        # main but still open new windows on their own 1x screen; nglif can't be tested at 2x there.
+        echo "  skip  $name: macOS opened the window on a ${scale}x screen, not the ${want_scale}x one"
+        pkill -9 -x nglif || true
+        return
+    fi
     sleep 3 # a few frames
     screencapture -l"$id" -o -x "$out/$name.png" || true
     pkill -x nglif || true # SDL turns SIGTERM into a quit request
